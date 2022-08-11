@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class EntryLists extends StatefulWidget {
+  const EntryLists({Key? key}) : super(key: key);
+
   @override
   _EntryListsState createState() => _EntryListsState();
 }
@@ -10,7 +12,7 @@ class _EntryListsState extends State<EntryLists> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Wastegram')),
+      appBar: AppBar(title: const Text('Wastegram')),
       body: StreamBuilder(
           stream:
               FirebaseFirestore.instance.collection('bandnames').snapshots(),
@@ -18,7 +20,7 @@ class _EntryListsState extends State<EntryLists> {
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasData &&
                 snapshot.data!.docs != null &&
-                snapshot.data!.docs.length > 0) {
+                snapshot.data!.docs.isNotEmpty) {
               return ListView.builder(
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (context, index) {
@@ -28,10 +30,10 @@ class _EntryListsState extends State<EntryLists> {
                         subtitle: Text(post['votes'].toString()));
                   });
             } else {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
           }),
-      floatingActionButton: NewEntryButton(),
+      floatingActionButton: const NewEntryButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
@@ -42,10 +44,12 @@ class _EntryListsState extends State<EntryLists> {
  * if the button is pressed
  */
 class NewEntryButton extends StatelessWidget {
+  const NewEntryButton({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         onPressed: () {
           FirebaseFirestore.instance
               .collection('bandnames')

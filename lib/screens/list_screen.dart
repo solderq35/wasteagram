@@ -69,6 +69,8 @@ class ListScreen extends StatelessWidget {
       floatingActionButton: Builder(
         builder: (context) {
           return Semantics(
+            button: true,
+            onTapHint: 'Press to create a new post',
             child: FloatingActionButton(
               onPressed: () async {
                 await chooseImageSource(context);
@@ -78,8 +80,6 @@ class ListScreen extends StatelessWidget {
               },
               child: const Icon(Icons.add_outlined)
             ),
-            button: true,
-            onTapHint: 'Press to create a new post',
           );
         },
       ),

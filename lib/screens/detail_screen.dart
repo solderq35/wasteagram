@@ -29,9 +29,9 @@ class DetailScreen extends StatelessWidget {
 
           // image
           Semantics(
-            child: Image.network(post['imageURL']),  // from cloud storage
             image: true,
-            label: 'Food waste item image'
+            label: 'Food waste item image',
+            child: Image.network(post['imageURL'])
           ),
 
           // item name

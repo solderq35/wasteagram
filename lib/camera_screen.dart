@@ -21,7 +21,7 @@ class _CameraScreenState extends State<CameraScreen> {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     image = File(pickedFile!.path); 
 
-    var fileName = DateTime.now().toString() + '.jpg';
+    var fileName = '${DateTime.now()}.jpg';
     Reference storageReference = FirebaseStorage.instance.ref().child(fileName);
     UploadTask uploadTask = storageReference.putFile(image!);
     await uploadTask;
@@ -36,7 +36,7 @@ class _CameraScreenState extends State<CameraScreen> {
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasData &&
               snapshot.data!.docs != null &&
-              snapshot.data!.docs.length > 0) {
+              snapshot.data!.docs.isNotEmpty) {
             return Column(
               children: [
                 Expanded(
@@ -51,7 +51,7 @@ class _CameraScreenState extends State<CameraScreen> {
                   ),
                 ),
                 ElevatedButton(
-                  child: Text('Select photo and upload data'),
+                  child: const Text('Select photo and upload data'),
                   onPressed: () {
                     uploadData();
                   },
@@ -61,9 +61,9 @@ class _CameraScreenState extends State<CameraScreen> {
           } else {
             return Column(
               children: [
-                Center(child: CircularProgressIndicator()),
+                const Center(child: CircularProgressIndicator()),
                 ElevatedButton(
-                  child: Text('Select photo and upload data'),
+                  child: const Text('Select photo and upload data'),
                   onPressed: () {
                     uploadData();
                   },
@@ -77,7 +77,7 @@ class _CameraScreenState extends State<CameraScreen> {
   void uploadData() async {
     final url = await getImage();
     final weight = DateTime.now().millisecondsSinceEpoch % 1000;
-    final title = 'Title ' + weight.toString();
+    final title = 'Title $weight';
     FirebaseFirestore.instance
         .collection('posts')
         .add({'weight': weight, 'title': title, 'url': url});

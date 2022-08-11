@@ -38,7 +38,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
   // Upload image to Firebase Cloud Storage and get the URL of image for
   // storage in the database
   Future uploadImage() async {
-    var fileName = DateTime.now().toString() + '.jpg';  // create unique filename
+    var fileName = '${DateTime.now()}.jpg';  // create unique filename
     Reference storageReference = FirebaseStorage.instance.ref().child(fileName);
     await storageReference.putFile(image!);
     // get URL of uploaded image to save to database

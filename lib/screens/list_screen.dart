@@ -5,6 +5,7 @@ import 'package:wasteagram/screens/new_post_screen.dart';
 import 'new_post_screen.dart';
 import '../components/post_list_view.dart';
 import '../components/dialog.dart';
+import '../components/total_app_bar.dart';
 
 class ListScreen extends StatelessWidget {
   ListScreen({Key? key}) : super(key: key);
@@ -12,6 +13,7 @@ class ListScreen extends StatelessWidget {
   // for image selection and storage
   File? image;
   final picker = ImagePicker();
+  num totalCount = 0;
 
   // Upon pressing the add post button, chooseImageSource() is called
   // which shows a dialog to choose between camera and gallery.
@@ -58,9 +60,7 @@ class ListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Wasteagram'),
-      ),
+      appBar: AppBar(centerTitle: true, title: const totalAppBar()),
       body: const PostListView(),
       floatingActionButton: Builder(
         builder: (context) {

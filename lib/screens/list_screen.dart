@@ -6,14 +6,6 @@ import 'new_post_screen.dart';
 import '../components/post_list_view.dart';
 import '../components/dialog.dart';
 
-// for choosing image source
-/*
-enum CameraOrGallery {
-  camera,
-  gallery
-}
-*/
-
 class ListScreen extends StatelessWidget {
   ListScreen({Key? key}) : super(key: key);
 
@@ -88,31 +80,4 @@ class ListScreen extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
-/*
-  Widget dialogCamera(BuildContext context) {
-    return SimpleDialogOption(
-      onPressed: () { Navigator.pop(context, 1); },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: const [
-          Text('Camera'),
-          Icon(Icons.camera_alt)
-        ],
-      )
-    );
-  }
-
-  Widget dialogGallery(BuildContext context) {
-    return SimpleDialogOption(
-      onPressed: () { Navigator.pop(context, 2); },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: const [
-          Text('Gallery'),
-          Icon(Icons.photo_library_outlined)
-        ],
-      )
-    );
-  }
-*/
 }

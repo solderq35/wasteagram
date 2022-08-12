@@ -8,7 +8,6 @@ class FoodWastePost {
   double? latitude;
   double? longitude;
   int? quantity;
-  String? item;
 
   FoodWastePost();
 
@@ -18,7 +17,6 @@ class FoodWastePost {
     latitude = postMap['latitude'];
     longitude = postMap['longitude'];
     quantity = postMap['quantity'];
-    item = postMap['item'];
   }
 
   Map<String, dynamic> toMap() {
@@ -28,7 +26,6 @@ class FoodWastePost {
       'latitude': latitude,
       'longitude': longitude,
       'quantity': quantity,
-      'item': item
     };
   }
 

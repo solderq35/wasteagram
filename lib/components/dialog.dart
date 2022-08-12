@@ -1,16 +1,8 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:wasteagram/screens/new_post_screen.dart';
-import '../screens/new_post_screen.dart';
-import '../components/post_list_view.dart';
 
 class dialogGallery extends StatelessWidget {
-  //int dos;
-  int picture_medium;
 
-  // final GlobalKey<FormState> formKey;
-//  final File? image;
+  int picture_medium;
 
   dialogGallery(BuildContext context, {Key? key, required this.picture_medium})
       : super(key: key);
@@ -29,11 +21,7 @@ class dialogGallery extends StatelessWidget {
 }
 
 class dialogCamera extends StatelessWidget {
-  //int dos;
   int picture_medium;
-
-  // final GlobalKey<FormState> formKey;
-//  final File? image;
 
   dialogCamera(BuildContext context, {Key? key, required this.picture_medium})
       : super(key: key);

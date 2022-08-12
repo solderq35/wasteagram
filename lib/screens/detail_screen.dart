@@ -16,35 +16,33 @@ class DetailScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Wasteagram'),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          // date
-          Text(
-              DateFormat('EEE, MMMM dd, yyyy')
-                  .format(DateTime.fromMillisecondsSinceEpoch(post['date'])),
-              style: Theme.of(context).textTheme.headline5),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // date
+            Text(
+                DateFormat('EEE, MMMM dd, yyyy')
+                    .format(DateTime.fromMillisecondsSinceEpoch(post['date'])),
+                style: Theme.of(context).textTheme.headline5),
 
-          // image
-          Semantics(
-              image: true,
-              label: 'Food waste item image',
-              child: Image.network(post['imageURL'])),
+            // image
+            Semantics(
+                image: true,
+                label: 'Food waste item image',
+                child: Image.network(post['imageURL'])),
 
-          // item name
-          Text('Item: ${post['item']}',
-              style: Theme.of(context).textTheme.headline5),
+            // item quantity
+            Text('${post['quantity'].toString()} items',
+                style: Theme.of(context).textTheme.headline5),
 
-          // item quantity
-          Text('${post['quantity'].toString()} items',
-              style: Theme.of(context).textTheme.headline5),
-
-          // GPS location
-          Text(
-              'Location: (${post['latitude'].toString()}, ${post['longitude'].toString()})',
-              style: Theme.of(context).textTheme.subtitle1)
-        ],
+            // GPS location
+            Text(
+                'Location: (${post['latitude'].toString()}, ${post['longitude'].toString()})',
+                style: Theme.of(context).textTheme.subtitle1)
+          ],
+        ),
       ),
     );
   }

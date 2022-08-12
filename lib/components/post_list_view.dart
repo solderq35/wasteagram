@@ -24,10 +24,20 @@ class PostListView extends StatelessWidget {
                   var post = snapshot.data!.docs[index];
                   return Card(
                     child: ListTile(
-                      title: Text(post['item']),
-                      subtitle: Text('${post['quantity'].toString()} items'),
-                      trailing: Text(DateFormat('EEE, MMMM dd, yyyy').format(
-                          DateTime.fromMillisecondsSinceEpoch(post['date']))),
+                      title: Text(
+                        DateFormat('EEE, MMMM dd, yyyy').format(
+                          DateTime.fromMillisecondsSinceEpoch(post['date']),
+                        ),
+                        style: const TextStyle(
+                          fontSize: 25.0,
+                        ),
+                      ),
+                      trailing: Text(
+                        post['quantity'].toString(),
+                        style: const TextStyle(
+                          fontSize: 25.0,
+                        ),
+                      ),
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => DetailScreen(post: post)));

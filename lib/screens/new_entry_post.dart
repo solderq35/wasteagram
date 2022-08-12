@@ -13,7 +13,6 @@ import '../widgets/entry_input.dart';
 // ignore: must_be_immutable
 class NewPostScreen extends StatefulWidget {
   File? image;
-
   NewPostScreen({Key? key, required this.image}) : super(key: key);
 
   @override
@@ -23,27 +22,13 @@ class NewPostScreen extends StatefulWidget {
 
 class _NewPostScreenState extends State<NewPostScreen> {
   _NewPostScreenState({required this.image});
-
-  // for GPS
-  LocationData? locationData;
+  LocationData? locationData;     // for GPS
   final locationService = Location();
-
-  // for image selection and storage
-  final File? image;
+  final File? image;            // for image selection and storage
   final picker = ImagePicker();
+  final formKey = GlobalKey<FormState>();   // for form reference
+  final post = FoodWastePost();     // data transfer object for submitting form
 
-  // for form reference
-  final formKey = GlobalKey<FormState>();
-
-  // data transfer object for submitting form
-  final post = FoodWastePost();
-
-  // Upload image to Firebase Cloud Storage and get the URL of image for
-  // storage in the database
-
-  // ------------------------------------------------------
-  // -------------------- BUILD METHOD --------------------
-  // ------------------------------------------------------
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,25 +73,17 @@ class _NewPostScreenState extends State<NewPostScreen> {
               var isValid = formKey.currentState?.validate();
               if (isValid != null && isValid) {
                 formKey.currentState?.save();
-
-                // upload image to Cloud Firestore
-                await uploadImage();
-
-                // add date to post
-                // post.date = DateFormat('EEE, MMMM dd, yyyy').format(DateTime.now());
-                post.date = DateTime.now().millisecondsSinceEpoch;
-
-                // add location to post
-                await retrieveLocation();
+                await uploadImage();                                  // upload image to Cloud Firestore
+                post.date = DateTime.now().millisecondsSinceEpoch;    // add date to post
+                await retrieveLocation();                             // add location to post
 
                 // write to database
                 await FirebaseFirestore.instance
                     .collection('posts')
                     .add(post.toMap());
 
-                // return to list screen
                 // ignore: use_build_context_synchronously
-                Navigator.of(context).pop();
+                Navigator.of(context).pop();                          // return to list screen
               }
             },
             style: ElevatedButton.styleFrom(

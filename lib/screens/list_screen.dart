@@ -1,14 +1,13 @@
 import 'dart:io';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:wasteagram/screens/new_post_screen.dart';
-import 'new_post_screen.dart';
-import '../widgets/post_list_view.dart';
+import 'package:wasteagram/screens/new_entry_post.dart';
+import 'new_entry_post.dart';
+import '../widgets/detailed_post_body.dart';
 import '../widgets/dialog.dart';
 import '../widgets/total_app_bar.dart';
 import '../widgets/sentry_drawer.dart';
-import 'dart:async';
-
 
 // ignore: must_be_immutable
 class ListScreen extends StatelessWidget {
@@ -19,48 +18,8 @@ class ListScreen extends StatelessWidget {
   final picker = ImagePicker();
   num totalCount = 0;
 
-  // Upon pressing the add post button, chooseImageSource() is called
-  // which shows a dialog to choose between camera and gallery.
-  // Based on selection, pick image from source and save.
-  //
-  // modified from Flutter documentation -
-  // https://api.flutter.dev/flutter/material/SimpleDialog-class.html
-  Future<void> chooseImageSource(BuildContext context) async {
-    switch (await showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return SimpleDialog(
-            title: const Text('Select image source'),
-            children: [
-              DialogCamera(context, pictureMedium: 1),
-              DialogGallery(
-                context,
-                pictureMedium: 2,
-              ),
-            ],
-          );
-        })) {
-      case 1:
-        final pickedFile = await picker.pickImage(source: ImageSource.camera);
-        // if user clicks outside of dialog or cancels taking photo, image will
-        // be null and will pass null to new post screen
-        if (pickedFile != null) {
-          image = File(pickedFile.path);
-        }
-        break;
-      case 2:
-        final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-        if (pickedFile != null) {
-          // if user clicks outside of dialog or cancels
-          image = File(pickedFile.path);
-        }
-        break;
-    }
-  }
-
-  // ------------------------------------------------------
-  // -------------------- BUILD METHOD --------------------
-  // ------------------------------------------------------
+  // Function to choose between camera or gallery for image source
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,5 +44,40 @@ class ListScreen extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
+  }
+
+Future<void> chooseImageSource(BuildContext context) async {
+    switch (await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return SimpleDialog(
+            title: const Text('Select image source'),
+            children: [
+              CameraDialogChoice(context, pictureMedium: 1),
+              GalleryDialogChoice(
+                context,
+                pictureMedium: 2,
+              ),
+            ],
+          );
+        })) {
+      case 1:
+        final chosenFile = await picker.pickImage(source: ImageSource.camera);
+
+        // if user clicks outside of dialog or cancels taking photo, image will
+        // be null and will pass null to new post screen
+        if (chosenFile != null) {
+          image = File(chosenFile.path);
+        }
+        break;
+
+      case 2:
+        final chosenFile = await picker.pickImage(source: ImageSource.gallery);
+        if (chosenFile != null) {
+          // if user clicks outside of dialog or cancels
+          image = File(chosenFile.path);
+        }
+        break;
+    }
   }
 }

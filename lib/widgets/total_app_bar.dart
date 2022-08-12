@@ -4,9 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class TotalAppBar extends StatelessWidget {
   const TotalAppBar({Key? key}) : super(key: key);
 
-  // ------------------------------------------------------
-  // -------------------- BUILD METHOD --------------------
-  // ------------------------------------------------------
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(

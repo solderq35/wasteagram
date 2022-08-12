@@ -4,7 +4,6 @@ import '../models/food_waste_post.dart';
 
 // ignore: must_be_immutable
 class QuantityInput extends StatelessWidget {
-  // final GlobalKey<FormState> formKey;
   final File? image;
   FoodWastePost post = FoodWastePost();
 

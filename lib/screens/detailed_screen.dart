@@ -2,14 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
-class DetailScreen extends StatelessWidget {
-  const DetailScreen({Key? key, required this.post}) : super(key: key);
+class DetailedScreen extends StatelessWidget {
+  const DetailedScreen({Key? key, required this.post}) : super(key: key);
 
   final QueryDocumentSnapshot<Object?> post; // post data from database
 
-  // ------------------------------------------------------
-  // -------------------- BUILD METHOD --------------------
-  // ------------------------------------------------------
   @override
   Widget build(BuildContext context) {
     return Scaffold(

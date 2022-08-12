@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class DialogGallery extends StatelessWidget {
+class GalleryDialogChoice extends StatelessWidget {
 
   int pictureMedium;
 
-  DialogGallery(BuildContext context, {Key? key, required this.pictureMedium})
+  GalleryDialogChoice(BuildContext context, {Key? key, required this.pictureMedium})
       : super(key: key);
 
   @override
@@ -22,10 +22,11 @@ class DialogGallery extends StatelessWidget {
 }
 
 // ignore: must_be_immutable
-class DialogCamera extends StatelessWidget {
+class CameraDialogChoice extends StatelessWidget {
+  
   int pictureMedium;
 
-  DialogCamera(BuildContext context, {Key? key, required this.pictureMedium})
+  CameraDialogChoice(BuildContext context, {Key? key, required this.pictureMedium})
       : super(key: key);
 
   @override

@@ -6,9 +6,6 @@ import '../screens/detail_screen.dart';
 class PostListView extends StatelessWidget {
   const PostListView({Key? key}) : super(key: key);
 
-  // ------------------------------------------------------
-  // -------------------- BUILD METHOD --------------------
-  // ------------------------------------------------------
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -40,7 +37,7 @@ class PostListView extends StatelessWidget {
                       ),
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => DetailScreen(post: post)));
+                            builder: (context) => DetailedScreen(post: post)));
                       },
                     ),
                   );

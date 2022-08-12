@@ -1,5 +1,5 @@
 /*
-Data Transfer Object for storing post data and writing to database
+Data Transfer Object for writing to database and storing post data
 */
 
 class FoodWastePost {

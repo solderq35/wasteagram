@@ -6,6 +6,9 @@ import 'new_post_screen.dart';
 import '../components/post_list_view.dart';
 import '../components/dialog.dart';
 import '../components/total_app_bar.dart';
+import '../components/sentry_drawer.dart';
+import 'dart:async';
+
 
 class ListScreen extends StatelessWidget {
   ListScreen({Key? key}) : super(key: key);
@@ -62,6 +65,7 @@ class ListScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(centerTitle: true, title: const totalAppBar()),
       body: const PostListView(),
+      drawer: SentryTestDrawer(),
       floatingActionButton: Builder(
         builder: (context) {
           return Semantics(

@@ -6,7 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:location/location.dart';
 import '../models/food_waste_post.dart';
-
+import '../components/display_image.dart';
 
 class NewPostScreen extends StatefulWidget {
   File? image;
@@ -107,7 +107,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                displayImage(),
+                displayImage(image: image,),
                 itemNameInput(),
                 quantityInput(),
                 uploadButton()
@@ -121,6 +121,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
 
   // display image picked from gallery - 
   // display progress indicator while image is loading
+  /*
   Widget displayImage() {
     Widget child;
     if (image == null) {  // display progress indicator
@@ -138,7 +139,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
       child: child,
     );
   }
-
+*/
   // form input for item name
   Widget itemNameInput() {
     return Padding(

@@ -7,7 +7,8 @@ class quantityInput extends StatelessWidget {
   final File? image;
   FoodWastePost post = FoodWastePost();
 
-  quantityInput({Key? key, required this.image, required this.post}) : super(key: key);
+  quantityInput({Key? key, required this.image, required this.post})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +42,8 @@ class itemNameInput extends StatelessWidget {
   final File? image;
   FoodWastePost post = FoodWastePost();
 
-  itemNameInput({Key? key, required this.image, required this.post}) : super(key: key);
+  itemNameInput({Key? key, required this.image, required this.post})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

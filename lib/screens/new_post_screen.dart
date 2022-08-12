@@ -19,7 +19,6 @@ class NewPostScreen extends StatefulWidget {
 }
 
 class _NewPostScreenState extends State<NewPostScreen> {
-
   _NewPostScreenState({required this.image});
 
   // for GPS
@@ -38,8 +37,90 @@ class _NewPostScreenState extends State<NewPostScreen> {
 
   // Upload image to Firebase Cloud Storage and get the URL of image for
   // storage in the database
+
+  // ------------------------------------------------------
+  // -------------------- BUILD METHOD --------------------
+  // ------------------------------------------------------
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('New Post'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Form(
+          key: formKey,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                displayImage(
+                  image: image,
+                ),
+                itemNameInput(
+                  image: image,
+                  post: post,
+                ),
+                quantityInput(
+                  image: image,
+                  post: post,
+                ),
+                uploadButton()
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // validate input, upload image to cloud,
+  // gather data for upload to database in data transfer object 'post',
+  // write to database, then return to previous screen
+  Widget uploadButton() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Semantics(
+        button: true,
+        onTapHint: 'Press to upload the post',
+        child: ElevatedButton(
+            onPressed: () async {
+              var isValid = formKey.currentState?.validate();
+              if (isValid != null && isValid) {
+                formKey.currentState?.save();
+
+                // upload image to Cloud Firestore
+                await uploadImage();
+
+                // add date to post
+                // post.date = DateFormat('EEE, MMMM dd, yyyy').format(DateTime.now());
+                post.date = DateTime.now().millisecondsSinceEpoch;
+
+                // add location to post
+                await retrieveLocation();
+
+                // write to database
+                await FirebaseFirestore.instance
+                    .collection('posts')
+                    .add(post.toMap());
+
+                // return to list screen
+                Navigator.of(context).pop();
+              }
+            },
+            style: ElevatedButton.styleFrom(
+                minimumSize: const Size.fromHeight(100)),
+            child: const Icon(
+              Icons.cloud_upload_rounded,
+              size: 75.0,
+            )),
+      ),
+    );
+  }
+
   Future uploadImage() async {
-    var fileName = '${DateTime.now()}.jpg';  // create unique filename
+    var fileName = '${DateTime.now()}.jpg'; // create unique filename
     Reference storageReference = FirebaseStorage.instance.ref().child(fileName);
     await storageReference.putFile(image!);
     // get URL of uploaded image to save to database
@@ -79,7 +160,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
       post.latitude = locationData?.latitude;
       post.longitude = locationData?.longitude;
 
-    // default to (0, 0) upon error
+      // default to (0, 0) upon error
     } on PlatformException catch (e) {
       print('Error: ${e.toString()}, code: ${e.code}');
       locationData = null;
@@ -89,162 +170,4 @@ class _NewPostScreenState extends State<NewPostScreen> {
 
     setState(() {});
   }
-
-  // ------------------------------------------------------
-  // -------------------- BUILD METHOD --------------------
-  // ------------------------------------------------------
-  @override
-  Widget build(BuildContext context) {
-
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('New Post'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Form(
-          key: formKey,
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                displayImage(image: image,),
-                itemNameInput(image: image, post: post,),
-                quantityInput(image: image, post: post,),
-                uploadButton()
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  // display image picked from gallery - 
-  // display progress indicator while image is loading
-  /*
-  Widget displayImage() {
-    Widget child;
-    if (image == null) {  // display progress indicator
-      child = const Center(child: CircularProgressIndicator());
-    } else {  // display image
-      child = Semantics(
-        image: true,
-        label: 'Selected image',
-        child: Image.file(image as File),
-      );
-    }
-
-    return SizedBox(
-      height: 350,
-      child: child,
-    );
-  }
-*/
-
-/*
-  // form input for item name
-  Widget itemNameInput() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: TextFormField(
-        decoration: const InputDecoration(
-          hintText: 'Item Name',
-          border: UnderlineInputBorder()
-        ),
-        textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.headline5,
-        keyboardType: TextInputType.text,
-        onSaved: (value) {
-          if (value != null) {
-            post.item = value;
-          }
-        },
-        validator: (value) {
-          if (value != null && value.isEmpty) {
-            return 'Please enter an item name';
-          } else {
-            return null;
-          }
-        },
-      ),
-    );
-  }
-*/
-
-/*
-  // form input for quantity of items wasted
-  Widget quantityInput() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: TextFormField(
-        decoration: const InputDecoration(
-          hintText: 'Number of Wasted Items',
-          border: UnderlineInputBorder()
-        ),
-        textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.headline5,
-        keyboardType: TextInputType.number,
-        onSaved: (value) {
-          if (value != null) {
-            post.quantity = int.parse(value);
-          }
-        },
-        validator: (value) {
-          if (value != null && value.isEmpty) {
-            return 'Please enter a number of items';
-          } else {
-            return null;
-          }
-        },
-      ),
-    );
-  }
-*/
-
-  // validate input, upload image to cloud,
-  // gather data for upload to database in data transfer object 'post',
-  // write to database, then return to previous screen
-  Widget uploadButton() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Semantics(
-        button: true,
-        onTapHint: 'Press to upload the post',
-        child: ElevatedButton(
-          onPressed: () async {
-            var isValid = formKey.currentState?.validate();
-            if (isValid != null && isValid) {
-              formKey.currentState?.save();
-            
-              // upload image to Cloud Firestore
-              await uploadImage();
-
-              // add date to post
-              // post.date = DateFormat('EEE, MMMM dd, yyyy').format(DateTime.now());
-              post.date = DateTime.now().millisecondsSinceEpoch;
-
-              // add location to post
-              await retrieveLocation();
-
-              // write to database
-              await FirebaseFirestore.instance.collection('posts').add(post.toMap());
-
-              // return to list screen
-              Navigator.of(context).pop();
-            }
-
-          },
-          style: ElevatedButton.styleFrom(
-            minimumSize: const Size.fromHeight(100)
-          ),
-          child: const Icon(
-            Icons.cloud_upload_rounded,
-            size: 75.0,
-          )              
-        ),
-      ),
-    );
-  }
-
 }

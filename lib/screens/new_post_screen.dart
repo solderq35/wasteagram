@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -6,15 +7,17 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:location/location.dart';
 import '../models/food_waste_post.dart';
-import '../components/display_image.dart';
-import '../components/entry_input.dart';
+import '../widgets/display_image.dart';
+import '../widgets/entry_input.dart';
 
+// ignore: must_be_immutable
 class NewPostScreen extends StatefulWidget {
   File? image;
 
   NewPostScreen({Key? key, required this.image}) : super(key: key);
 
   @override
+  // ignore: no_logic_in_create_state
   State<NewPostScreen> createState() => _NewPostScreenState(image: image);
 }
 
@@ -55,10 +58,10 @@ class _NewPostScreenState extends State<NewPostScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                displayImage(
+                DisplayImage(
                   image: image,
                 ),
-                quantityInput(
+                QuantityInput(
                   image: image,
                   post: post,
                 ),
@@ -102,6 +105,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
                     .add(post.toMap());
 
                 // return to list screen
+                // ignore: use_build_context_synchronously
                 Navigator.of(context).pop();
               }
             },
@@ -128,11 +132,13 @@ class _NewPostScreenState extends State<NewPostScreen> {
   Future retrieveLocation() async {
     try {
       // check if service is enabled and request service if not enabled
-      var _serviceEnabled = await locationService.serviceEnabled();
-      if (!_serviceEnabled) {
-        _serviceEnabled = await locationService.requestService();
-        if (!_serviceEnabled) {
-          print('Failed to enable service. Returning.');
+      var serviceEnabled = await locationService.serviceEnabled();
+      if (!serviceEnabled) {
+        serviceEnabled = await locationService.requestService();
+        if (!serviceEnabled) {
+          if (kDebugMode) {
+            print('Failed to enable service. Returning.');
+          }
           post.latitude = 0;
           post.longitude = 0;
           return;
@@ -140,11 +146,13 @@ class _NewPostScreenState extends State<NewPostScreen> {
       }
 
       // check for permission and request permission if necessary
-      var _permissionGranted = await locationService.hasPermission();
-      if (_permissionGranted == PermissionStatus.denied) {
-        _permissionGranted = await locationService.requestPermission();
-        if (_permissionGranted != PermissionStatus.granted) {
-          print('Location service permission not granted. Returning.');
+      var permissionGranted = await locationService.hasPermission();
+      if (permissionGranted == PermissionStatus.denied) {
+        permissionGranted = await locationService.requestPermission();
+        if (permissionGranted != PermissionStatus.granted) {
+          if (kDebugMode) {
+            print('Location service permission not granted. Returning.');
+          }
           post.latitude = 0;
           post.longitude = 0;
           return;
@@ -158,7 +166,9 @@ class _NewPostScreenState extends State<NewPostScreen> {
 
       // default to (0, 0) upon error
     } on PlatformException catch (e) {
-      print('Error: ${e.toString()}, code: ${e.code}');
+      if (kDebugMode) {
+        print('Error: ${e.toString()}, code: ${e.code}');
+      }
       locationData = null;
       post.latitude = 0;
       post.longitude = 0;

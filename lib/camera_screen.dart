@@ -8,6 +8,7 @@ class CameraScreen extends StatefulWidget {
   const CameraScreen({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _CameraScreenState createState() => _CameraScreenState();
 }
 
@@ -37,6 +38,7 @@ class _CameraScreenState extends State<CameraScreen> {
         stream: FirebaseFirestore.instance.collection('posts').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasData &&
+              // ignore: unnecessary_null_comparison
               snapshot.data!.docs != null &&
               snapshot.data!.docs.isNotEmpty) {
             return Column(

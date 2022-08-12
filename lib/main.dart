@@ -3,8 +3,8 @@ import 'app.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
-import 'package:flutter/foundation.dart' as Foundation;
 
+// ignore: constant_identifier_names
 const DSN_URL = 'https://a50f4d627b3543709516798024b24874@o1357917.ingest.sentry.io/6644854';
 
 Future<void> main() async {

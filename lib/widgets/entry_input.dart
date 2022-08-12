@@ -2,12 +2,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import '../models/food_waste_post.dart';
 
-class quantityInput extends StatelessWidget {
+// ignore: must_be_immutable
+class QuantityInput extends StatelessWidget {
   // final GlobalKey<FormState> formKey;
   final File? image;
   FoodWastePost post = FoodWastePost();
 
-  quantityInput({Key? key, required this.image, required this.post})
+  QuantityInput({Key? key, required this.image, required this.post})
       : super(key: key);
 
   @override

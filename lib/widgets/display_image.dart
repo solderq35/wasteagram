@@ -1,11 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 
-class displayImage extends StatelessWidget {
+class DisplayImage extends StatelessWidget {
   // final GlobalKey<FormState> formKey;
   final File? image;
 
-  const displayImage({Key? key, required this.image}) : super(key: key);
+  const DisplayImage({Key? key, required this.image}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

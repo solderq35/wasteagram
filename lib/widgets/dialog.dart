@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 
-class dialogGallery extends StatelessWidget {
+// ignore: must_be_immutable
+class DialogGallery extends StatelessWidget {
 
-  int picture_medium;
+  int pictureMedium;
 
-  dialogGallery(BuildContext context, {Key? key, required this.picture_medium})
+  DialogGallery(BuildContext context, {Key? key, required this.pictureMedium})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SimpleDialogOption(
         onPressed: () {
-          Navigator.pop(context, picture_medium);
+          Navigator.pop(context, pictureMedium);
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -20,17 +21,18 @@ class dialogGallery extends StatelessWidget {
   }
 }
 
-class dialogCamera extends StatelessWidget {
-  int picture_medium;
+// ignore: must_be_immutable
+class DialogCamera extends StatelessWidget {
+  int pictureMedium;
 
-  dialogCamera(BuildContext context, {Key? key, required this.picture_medium})
+  DialogCamera(BuildContext context, {Key? key, required this.pictureMedium})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SimpleDialogOption(
         onPressed: () {
-          Navigator.pop(context, picture_medium);
+          Navigator.pop(context, pictureMedium);
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

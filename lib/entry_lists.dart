@@ -5,6 +5,7 @@ class EntryLists extends StatefulWidget {
   const EntryLists({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _EntryListsState createState() => _EntryListsState();
 }
 
@@ -19,6 +20,7 @@ class _EntryListsState extends State<EntryLists> {
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasData &&
+                // ignore: unnecessary_null_comparison
                 snapshot.data!.docs != null &&
                 snapshot.data!.docs.isNotEmpty) {
               return ListView.builder(

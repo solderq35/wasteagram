@@ -6,7 +6,6 @@ void main() {
   test('Post created with fromMap constructor saves attributes correctly', () {
     final date = DateTime.now().millisecondsSinceEpoch;
     const imageURL = 'test_url';
-    const item = 'test_item';
     const quantity = 5;
     const latitude = 40.7128;
     const longitude = 74.0060;
@@ -14,7 +13,6 @@ void main() {
     final foodWastePost = FoodWastePost.fromMap({
       'date' : date,
       'imageURL': imageURL,
-      'item': item,
       'quantity': quantity,
       'latitude': latitude,
       'longitude': longitude
@@ -30,7 +28,6 @@ void main() {
   test('toMap function returns map.', () {
     final date = DateTime.now().millisecondsSinceEpoch;
     const imageURL = 'test_url';
-    const item = 'test_item';
     const quantity = 5;
     const latitude = 40.7128;
     const longitude = 74.0060;
@@ -49,7 +46,6 @@ void main() {
   test('toMap function returns map with appropriate values', () {
     final date = DateTime.now().millisecondsSinceEpoch;
     const imageURL = 'test_url';
-    const item = 'test_item';
     const quantity = 5;
     const latitude = 40.7128;
     const longitude = 74.0060;
@@ -66,7 +62,6 @@ void main() {
     Map<String, dynamic> expected = {
       'date': date,
       'imageURL': imageURL,
-      'item': item,
       'quantity': quantity,
       'latitude' : latitude,
       'longitude': longitude

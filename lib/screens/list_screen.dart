@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:wasteagram/screens/new_post_screen.dart';
 import 'new_post_screen.dart';
-import '../components/post_list_view.dart';
-import '../components/dialog.dart';
-import '../components/total_app_bar.dart';
-import '../components/sentry_drawer.dart';
+import '../widgets/post_list_view.dart';
+import '../widgets/dialog.dart';
+import '../widgets/total_app_bar.dart';
+import '../widgets/sentry_drawer.dart';
 import 'dart:async';
 
 
+// ignore: must_be_immutable
 class ListScreen extends StatelessWidget {
   ListScreen({Key? key}) : super(key: key);
 
@@ -31,10 +32,10 @@ class ListScreen extends StatelessWidget {
           return SimpleDialog(
             title: const Text('Select image source'),
             children: [
-              dialogCamera(context, picture_medium: 1),
-              dialogGallery(
+              DialogCamera(context, pictureMedium: 1),
+              DialogGallery(
                 context,
-                picture_medium: 2,
+                pictureMedium: 2,
               ),
             ],
           );
@@ -63,9 +64,9 @@ class ListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(centerTitle: true, title: const totalAppBar()),
+      appBar: AppBar(centerTitle: true, title: const TotalAppBar()),
       body: const PostListView(),
-      drawer: SentryTestDrawer(),
+      drawer: const SentryTestDrawer(),
       floatingActionButton: Builder(
         builder: (context) {
           return Semantics(
@@ -74,6 +75,7 @@ class ListScreen extends StatelessWidget {
             child: FloatingActionButton(
                 onPressed: () async {
                   await chooseImageSource(context);
+                  // ignore: use_build_context_synchronously
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => NewPostScreen(image: image)));
                 },

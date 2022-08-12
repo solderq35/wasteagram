@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:location/location.dart';
 import '../models/food_waste_post.dart';
 import '../components/display_image.dart';
+import '../components/entry_input.dart';
 
 class NewPostScreen extends StatefulWidget {
   File? image;
@@ -108,8 +109,8 @@ class _NewPostScreenState extends State<NewPostScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 displayImage(image: image,),
-                itemNameInput(),
-                quantityInput(),
+                itemNameInput(image: image, post: post,),
+                quantityInput(image: image, post: post,),
                 uploadButton()
               ],
             ),
@@ -140,6 +141,8 @@ class _NewPostScreenState extends State<NewPostScreen> {
     );
   }
 */
+
+/*
   // form input for item name
   Widget itemNameInput() {
     return Padding(
@@ -167,7 +170,9 @@ class _NewPostScreenState extends State<NewPostScreen> {
       ),
     );
   }
+*/
 
+/*
   // form input for quantity of items wasted
   Widget quantityInput() {
     return Padding(
@@ -195,6 +200,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
       ),
     );
   }
+*/
 
   // validate input, upload image to cloud,
   // gather data for upload to database in data transfer object 'post',

@@ -22,7 +22,6 @@ void main() {
 
     expect(foodWastePost.date, date);
     expect(foodWastePost.imageURL, imageURL);
-    expect(foodWastePost.item, item);
     expect(foodWastePost.quantity, quantity);
     expect(foodWastePost.latitude, latitude);
     expect(foodWastePost.longitude, longitude);
@@ -40,7 +39,6 @@ void main() {
 
     foodWastePost.date = date;
     foodWastePost.imageURL = imageURL;
-    foodWastePost.item = item;
     foodWastePost.quantity = quantity;
     foodWastePost.latitude = latitude;
     foodWastePost.longitude = longitude;
@@ -61,7 +59,6 @@ void main() {
 
     foodWastePost.date = date;
     foodWastePost.imageURL = imageURL;
-    foodWastePost.item = item;
     foodWastePost.quantity = quantity;
     foodWastePost.latitude = latitude;
     foodWastePost.longitude = longitude;

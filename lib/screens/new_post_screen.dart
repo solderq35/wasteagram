@@ -58,12 +58,6 @@ class _NewPostScreenState extends State<NewPostScreen> {
                 displayImage(
                   image: image,
                 ),
-                /*
-                itemNameInput(
-                  image: image,
-                  post: post,
-                ),
-                */
                 quantityInput(
                   image: image,
                   post: post,

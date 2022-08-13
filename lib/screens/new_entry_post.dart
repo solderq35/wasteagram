@@ -22,12 +22,12 @@ class NewPostScreen extends StatefulWidget {
 
 class _NewPostScreenState extends State<NewPostScreen> {
   _NewPostScreenState({required this.image});
-  LocationData? locationData;     // for GPS
+  LocationData? locationData; // for GPS
   final locationService = Location();
-  final File? image;            // for image selection and storage
+  final File? image; // for image selection and storage
   final picker = ImagePicker();
-  final formKey = GlobalKey<FormState>();   // for form reference
-  final post = FoodWastePost();     // data transfer object for submitting form
+  final formKey = GlobalKey<FormState>(); // for form reference
+  final post = FoodWastePost(); // data transfer object for submitting form
 
   @override
   Widget build(BuildContext context) {
@@ -73,9 +73,10 @@ class _NewPostScreenState extends State<NewPostScreen> {
               var isValid = formKey.currentState?.validate();
               if (isValid != null && isValid) {
                 formKey.currentState?.save();
-                await uploadImage();                                  // upload image to Cloud Firestore
-                post.date = DateTime.now().millisecondsSinceEpoch;    // add date to post
-                await retrieveLocation();                             // add location to post
+                await uploadImage(); // upload image to Cloud Firestore
+                post.date =
+                    DateTime.now().millisecondsSinceEpoch; // add date to post
+                await retrieveLocation(); // add location to post
 
                 // write to database
                 await FirebaseFirestore.instance
@@ -83,7 +84,7 @@ class _NewPostScreenState extends State<NewPostScreen> {
                     .add(post.toMap());
 
                 // ignore: use_build_context_synchronously
-                Navigator.of(context).pop();                          // return to list screen
+                Navigator.of(context).pop(); // return to list screen
               }
             },
             style: ElevatedButton.styleFrom(

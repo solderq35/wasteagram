@@ -4,8 +4,7 @@ import 'screens/list_screen.dart';
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 
-  static Future<void> reportError(dynamic error, dynamic stackTrace) async {
-  }
+  static Future<void> reportError(dynamic error, dynamic stackTrace) async {}
 
   @override
   Widget build(BuildContext context) {
@@ -18,4 +17,3 @@ class App extends StatelessWidget {
     );
   }
 }
-

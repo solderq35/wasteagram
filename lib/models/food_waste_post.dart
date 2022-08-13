@@ -28,5 +28,4 @@ class FoodWastePost {
       'quantity': quantity,
     };
   }
-
 }

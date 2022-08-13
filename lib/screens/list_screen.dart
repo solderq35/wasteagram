@@ -19,7 +19,7 @@ class ListScreen extends StatelessWidget {
   num totalCount = 0;
 
   // Function to choose between camera or gallery for image source
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +46,7 @@ class ListScreen extends StatelessWidget {
     );
   }
 
-Future<void> chooseImageSource(BuildContext context) async {
+  Future<void> chooseImageSource(BuildContext context) async {
     switch (await showDialog(
         context: context,
         builder: (BuildContext context) {
